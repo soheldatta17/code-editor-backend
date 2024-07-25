@@ -69,8 +69,8 @@ app.post("/compile", (req, res) => {
     }
 
     let execution_data = {
-        clientId: '48ea152f5802fe6eeb6d235624a59fb4',
-        clientSecret: '624d62762ba12f6ef2846dd9b9eb8cb262d9ca1e0608a0ef71c93fd7374a3a08',
+        clientId: '69d6d34709dc8f5327796f28d9d81a21',
+        clientSecret: 'b67f9898e5c789486b356dd635c6ca63ffe96318e11d586aa0e35cbf93c3f388',
         script: code,
         language: language,
         versionIndex: '0',
