@@ -1,11 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const request = require("request");  // Ensure you have the request module installed
-const app = express();
-const PORT = 8000;
+const request = require("request");
+const dotenv = require("dotenv");
 
+// Load environment variables from .env file
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send(`
         <!DOCTYPE html>
@@ -59,7 +64,6 @@ app.get('/', (req, res) => {
 });
 
 app.post("/compile", (req, res) => {
-    // Getting the required data from the request
     let code = req.body.code;
     let language = req.body.language;
     let input = req.body.input;
@@ -80,17 +84,17 @@ app.post("/compile", (req, res) => {
     request.post({
         url: 'https://api.jdoodle.com/v1/execute',
         json: execution_data
-    }, function(error, response, body) {
+    }, function (error, response, body) {
         if (error) {
             console.error('Error:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         } else {
             console.log('Execution response:', body);
-            res.json(body);  // Send the response to the client
+            res.json(body);
         }
     });
 });
 
-app.listen(process.env.PORT || PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
